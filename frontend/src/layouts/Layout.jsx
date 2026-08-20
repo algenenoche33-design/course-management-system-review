@@ -1,4 +1,4 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 
 const navLinks = [
   { to: '/courses', label: 'Courses' },
@@ -9,17 +9,26 @@ const navLinks = [
 export default function Layout() {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="border-b border-gray-200">
+      <header className="bg-primary">
         <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-          <Link to="/courses" className="text-lg font-semibold text-gray-900">
+          <Link to="/courses" className="text-lg font-semibold text-white">
             CMS
           </Link>
           <ul className="flex items-center gap-6">
             {navLinks.map((link) => (
               <li key={link.to}>
-                <Link to={link.to} className="text-sm text-gray-600 hover:text-gray-900">
+                <NavLink
+                  to={link.to}
+                  className={({ isActive }) =>
+                    `border-b-2 pb-0.5 text-sm font-medium transition-colors ${
+                      isActive
+                        ? 'border-accent text-white'
+                        : 'border-transparent text-white/70 hover:text-white'
+                    }`
+                  }
+                >
                   {link.label}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>
